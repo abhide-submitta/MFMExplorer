@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My First Million Episode Finder</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --border: #2a2e38;
+    --text: #e8e9ed;
+    --text-dim: #9a9ea8;
+    --text-faint: #5f636e;
+    --accent: #5b8def;
+    --accent-bg: rgba(91, 141, 239, 0.12);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .layout {
+    display: flex;
+    max-width: 1300px;
+    margin: 0 auto;
+    align-items: flex-start;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    padding: 28px 16px 60px 24px;
+    position: sticky;
+    top: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  .sidebar h1 {
+    font-size: 17px;
+    margin: 0 0 4px;
+  }
+  .sidebar .subtitle {
+    color: var(--text-dim);
+    font-size: 12.5px;
+    margin: 0 0 20px;
+  }
+  .filter-group {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+  }
+  .filter-group-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px 0;
+  }
+  .filter-group-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .filter-group-toggle {
+    color: var(--text-faint);
+    font-size: 11px;
+    transition: transform 0.15s ease;
+  }
+  .filter-group.collapsed .filter-group-toggle { transform: rotate(-90deg); }
+  .filter-options {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .filter-group.collapsed .filter-options { display: none; }
+  .filter-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text-dim);
+    cursor: pointer;
+    user-select: none;
+  }
+  .filter-option:hover { color: var(--text); }
+  .filter-option input[type="checkbox"] {
+    accent-color: var(--accent);
+    width: 14px;
+    height: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .filter-option.checked { color: var(--text); font-weight: 600; }
+  .filter-option .count {
+    color: var(--text-faint);
+    font-weight: 400;
+    font-size: 12px;
+    margin-left: auto;
+    padding-left: 6px;
+  }
+  .filter-option.zero-count { opacity: 0.4; }
+
+  /* ---------- Main content ---------- */
+  main {
+    flex: 1;
+    min-width: 0;
+    padding: 28px 24px 60px 16px;
+    border-left: 1px solid var(--border);
+  }
+  .active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+  .active-filter-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-bg);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .active-filter-chip .x { font-weight: 700; }
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-dim);
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+  .clear-btn {
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 5px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12.5px;
+  }
+  .clear-btn:hover { color: var(--text); border-color: var(--text-dim); }
+  .episode-list { display: flex; flex-direction: column; gap: 10px; }
+  .episode-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .episode-title { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
+  .episode-title a { color: var(--text); text-decoration: none; }
+  .episode-title a:hover { color: var(--accent); }
+  .episode-meta { color: var(--text-dim); font-size: 12px; margin-bottom: 8px; }
+  .episode-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .episode-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #1f232c;
+    color: var(--text-dim);
+  }
+  .episode-tag.matched { background: var(--accent-bg); color: var(--accent); }
+  .empty-state, .loading { text-align: center; color: var(--text-dim); padding: 60px 20px; }
+
+  @media (max-width: 800px) {
+    .layout { flex-direction: column; }
+    .sidebar {
+      width: 100%;
+      position: static;
+      max-height: none;
+      padding: 20px 20px 0;
+    }
+    main { border-left: none; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+  <aside class="sidebar">
+    <h1>My First Million Episode Finder: What is your need of the day?</h1>
+    <p class="subtitle">Created by Anushka Bhide, avid and moody listener who will no doubt use this when wanting information vs inspiration vs just good ol' company.</p>
+    <div id="filterGroups"></div>
+  </aside>
+
+  <main>
+    <div class="active-filters" id="activeFilters"></div>
+    <div class="toolbar">
+      <span id="resultCount"></span>
+      <button class="clear-btn" id="clearBtn">Clear all filters</button>
+    </div>
+    <div class="episode-list" id="episodeList">
+      <div class="loading">Loading episodes...</div>
+    </div>
+  </main>
+</div>
+
+<script>
+const TAXONOMY = {
+  "Stage": ["idea-validation","side-hustle-part-time","0-to-1-launch","scaling-ops","fundraising","exit-or-acquisition"],
+  "Function": ["sales-and-closing","marketing-and-growth","hiring-and-team","finance-and-unit-economics","product-and-positioning","operations"],
+  "Business Model": ["crypto-and-web3","real-estate","ecommerce-and-dtc","content-and-newsletter-business","investing-and-public-markets","blue-collar-and-local-services"],
+  "Career / Personal": ["career-pivot","founder-mental-health","health-and-longevity","motivation-and-mindset","family-and-life-integration","money-mindset-personal-wealth"],
+  "Format": ["guest-interview","idea-brainstorm","news-reaction","deep-dive-single-topic","historical-biography-deep-dive","greatest-hits-replay"]
+};
+
+// selections[group] = Set of checked tags within that group
+let selections = {};
+Object.keys(TAXONOMY).forEach(g => selections[g] = new Set());
+
+let collapsedGroups = new Set(); // group labels currently collapsed
+let episodes = [];
+
+function tagGroup(tag) {
+  for (const [g, tags] of Object.entries(TAXONOMY)) {
+    if (tags.includes(tag)) return g;
+  }
+  return null;
+}
+
+async function loadEpisodes() {
+  try {
+    const res = await fetch("episodes.json");
+    if (!res.ok) throw new Error("Failed to load episodes.json");
+    episodes = await res.json();
+  } catch (e) {
+    document.getElementById("episodeList").innerHTML =
+      '<div class="empty-state">Could not load episodes.json. Make sure it\'s in the same folder as this file.</div>';
+    return;
+  }
+  renderSidebar();
+  render();
+}
+
+// Does an episode pass the current filters, optionally ignoring one group
+// (used to compute "if I also checked this" counts)
+function episodeMatches(ep, ignoreGroup) {
+  const tags = ep.tags || [];
+  for (const [group, selectedSet] of Object.entries(selections)) {
+    if (group === ignoreGroup) continue;
+    if (selectedSet.size === 0) continue;
+    const hasOne = [...selectedSet].some(t => tags.includes(t));
+    if (!hasOne) return false;
+  }
+  return true;
+}
+
+function renderSidebar() {
+  const container = document.getElementById("filterGroups");
+  container.innerHTML = "";
+
+  for (const [groupLabel, tags] of Object.entries(TAXONOMY)) {
+    const groupDiv = document.createElement("div");
+    groupDiv.className = "filter-group" + (collapsedGroups.has(groupLabel) ? " collapsed" : "");
+
+    const header = document.createElement("div");
+    header.className = "filter-group-header";
+    header.innerHTML = `<span class="filter-group-title">${groupLabel}</span><span class="filter-group-toggle">▾</span>`;
+    header.onclick = () => {
+      if (collapsedGroups.has(groupLabel)) collapsedGroups.delete(groupLabel);
+      else collapsedGroups.add(groupLabel);
+      renderSidebar();
+    };
+    groupDiv.appendChild(header);
+
+    const optionsDiv = document.createElement("div");
+    optionsDiv.className = "filter-options";
+
+    // count episodes matching current filters (excluding this group) per tag
+    const counts = {};
+    tags.forEach(t => {
+      counts[t] = episodes.filter(ep => episodeMatches(ep, groupLabel) && (ep.tags || []).includes(t)).length;
+    });
+
+    tags.forEach(tag => {
+      const isChecked = selections[groupLabel].has(tag);
+      const count = counts[tag];
+      const optDiv = document.createElement("label");
+      optDiv.className = "filter-option" + (isChecked ? " checked" : "") + (count === 0 && !isChecked ? " zero-count" : "");
+      optDiv.innerHTML = `
+        <input type="checkbox" ${isChecked ? "checked" : ""} data-group="${groupLabel}" data-tag="${tag}">
+        <span>${tag.replace(/-/g, " ")}</span>
+        <span class="count">${count}</span>
+      `;
+      optDiv.querySelector("input").addEventListener("change", (e) => {
+        toggleTag(groupLabel, tag);
+      });
+      optionsDiv.appendChild(optDiv);
+    });
+
+    groupDiv.appendChild(optionsDiv);
+    container.appendChild(groupDiv);
+  }
+}
+
+function toggleTag(group, tag) {
+  if (selections[group].has(tag)) selections[group].delete(tag);
+  else selections[group].add(tag);
+  renderSidebar();
+  render();
+}
+
+function renderActiveFilters() {
+  const container = document.getElementById("activeFilters");
+  container.innerHTML = "";
+  let any = false;
+  for (const [group, set] of Object.entries(selections)) {
+    set.forEach(tag => {
+      any = true;
+      const chip = document.createElement("div");
+      chip.className = "active-filter-chip";
+      chip.innerHTML = `<span>${tag.replace(/-/g, " ")}</span><span class="x">×</span>`;
+      chip.onclick = () => toggleTag(group, tag);
+      container.appendChild(chip);
+    });
+  }
+  container.style.display = any ? "flex" : "none";
+}
+
+function render() {
+  renderActiveFilters();
+  const filtered = episodes.filter(ep => episodeMatches(ep, null));
+
+  document.getElementById("resultCount").textContent =
+    `${filtered.length} episode${filtered.length !== 1 ? "s" : ""}`;
+
+  const listEl = document.getElementById("episodeList");
+  if (filtered.length === 0) {
+    listEl.innerHTML = '<div class="empty-state">No episodes match these filters. Try removing one.</div>';
+    return;
+  }
+
+  const allSelectedTags = new Set();
+  Object.values(selections).forEach(set => set.forEach(t => allSelectedTags.add(t)));
+
+  listEl.innerHTML = filtered.slice(0, 200).map(ep => {
+    const tagsHtml = (ep.tags || []).map(t =>
+      `<span class="episode-tag ${allSelectedTags.has(t) ? "matched" : ""}">${t.replace(/-/g, " ")}</span>`
+    ).join("");
+    const epNum = ep.episode_number ? `#${ep.episode_number}` : "Special";
+    const dateStr = ep.date ? new Date(ep.date).toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"}) : "";
+    return `
+      <div class="episode-card">
+        <div class="episode-title"><a href="${ep.url}" target="_blank" rel="noopener">${ep.title}</a></div>
+        <div class="episode-meta">${epNum}${dateStr ? " · " + dateStr : ""}</div>
+        <div class="episode-tags">${tagsHtml}</div>
+      </div>
+    `;
+  }).join("");
+}
+
+document.getElementById("clearBtn").addEventListener("click", () => {
+  Object.keys(selections).forEach(g => selections[g].clear());
+  renderSidebar();
+  render();
+});
+
+loadEpisodes();
+</script>
+
+</body>
+</html>
