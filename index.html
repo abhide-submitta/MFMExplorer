@@ -4,55 +4,127 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My First Million Episode Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0f1115;
-    --panel: #171a21;
-    --border: #2a2e38;
-    --text: #e8e9ed;
-    --text-dim: #9a9ea8;
-    --text-faint: #5f636e;
-    --accent: #5b8def;
-    --accent-bg: rgba(91, 141, 239, 0.12);
+    --console: #181B34;
+    --console-panel: #232748;
+    --console-line: #33385f;
+    --console-text: #e8e9f5;
+    --console-text-dim: #9498c2;
+    --console-text-faint: #5d6191;
+
+    --paper: #FDFCF9;
+    --card: #ffffff;
+    --card-border: #E7E3D8;
+    --ink: #201c14;
+    --ink-dim: #7a7568;
+
+    --stage: #2F6FED;
+    --stage-tint: #E8F0FE;
+    --function: #0F9D58;
+    --function-tint: #E5F7ED;
+    --bizmodel: #C98A00;
+    --bizmodel-tint: #FBF1DA;
+    --personal: #E23D8E;
+    --personal-tint: #FCE8F2;
+    --format: #7C3AED;
+    --format-tint: #F1EBFD;
+    --default: #6b6b6b;
+    --default-tint: #f0f0ee;
   }
   * { box-sizing: border-box; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
     line-height: 1.5;
   }
   .layout {
     display: flex;
-    max-width: 1300px;
+    max-width: 1360px;
     margin: 0 auto;
     align-items: flex-start;
   }
 
-  /* ---------- Sidebar ---------- */
+  /* ---------- Console sidebar ---------- */
   .sidebar {
-    width: 260px;
+    width: 288px;
     flex-shrink: 0;
-    padding: 28px 16px 60px 24px;
+    background: var(--console);
+    color: var(--console-text);
+    padding: 30px 18px 60px 26px;
     position: sticky;
     top: 0;
+    min-height: 100vh;
     max-height: 100vh;
     overflow-y: auto;
   }
-  .sidebar h1 {
-    font-size: 17px;
-    margin: 0 0 4px;
+  .brand-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
   }
-  .sidebar .subtitle {
-    color: var(--text-dim);
+  .eq-bars { display: flex; align-items: flex-end; gap: 2px; height: 16px; }
+  .eq-bars span {
+    display: block;
+    width: 3px;
+    background: var(--stage);
+    border-radius: 1px;
+    animation: eqbounce 1.1s ease-in-out infinite;
+  }
+  .eq-bars span:nth-child(1) { height: 6px; background: var(--stage); animation-delay: 0s; }
+  .eq-bars span:nth-child(2) { height: 14px; background: var(--function); animation-delay: 0.15s; }
+  .eq-bars span:nth-child(3) { height: 9px; background: var(--bizmodel); animation-delay: 0.3s; }
+  .eq-bars span:nth-child(4) { height: 12px; background: var(--personal); animation-delay: 0.45s; }
+  @keyframes eqbounce {
+    0%, 100% { transform: scaleY(0.5); }
+    50% { transform: scaleY(1); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .eq-bars span { animation: none; }
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--console-text-faint);
+    margin: 0 0 10px;
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    color: #ffffff;
+  }
+  .subtitle {
+    color: var(--console-text-dim);
     font-size: 12.5px;
     margin: 0 0 20px;
   }
+  .instruction-box {
+    background: var(--console-panel);
+    border: 1px solid var(--console-line);
+    border-left: 3px solid var(--function);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    color: var(--console-text);
+    margin-bottom: 24px;
+    line-height: 1.55;
+  }
+  .instruction-box b { color: #ffffff; }
+
   .filter-group {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 14px;
-    margin-bottom: 14px;
+    border-bottom: 1px solid var(--console-line);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
   }
   .filter-group-header {
     display: flex;
@@ -62,117 +134,195 @@
     padding: 4px 0;
   }
   .filter-group-title {
-    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.1em;
     font-weight: 600;
-    color: var(--text);
   }
   .filter-group-toggle {
-    color: var(--text-faint);
-    font-size: 11px;
+    color: var(--console-text-faint);
+    font-size: 10px;
     transition: transform 0.15s ease;
   }
   .filter-group.collapsed .filter-group-toggle { transform: rotate(-90deg); }
   .filter-options {
-    margin-top: 8px;
+    margin-top: 12px;
     display: flex;
     flex-direction: column;
-    gap: 7px;
+    gap: 3px;
   }
   .filter-group.collapsed .filter-options { display: none; }
+
+  /* switch-style checkbox */
   .filter-option {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     font-size: 13px;
-    color: var(--text-dim);
+    color: var(--console-text-dim);
     cursor: pointer;
     user-select: none;
+    padding: 6px 7px;
+    border-radius: 7px;
+    transition: background 0.12s ease;
   }
-  .filter-option:hover { color: var(--text); }
-  .filter-option input[type="checkbox"] {
-    accent-color: var(--accent);
-    width: 14px;
-    height: 14px;
-    cursor: pointer;
+  .filter-option:hover { background: var(--console-panel); }
+  .switch {
+    position: relative;
+    width: 30px;
+    height: 17px;
     flex-shrink: 0;
+    border-radius: 999px;
+    background: #3a3f6b;
+    transition: background 0.15s ease;
   }
-  .filter-option.checked { color: var(--text); font-weight: 600; }
+  .switch::after {
+    content: "";
+    position: absolute;
+    top: 2px; left: 2px;
+    width: 13px; height: 13px;
+    border-radius: 50%;
+    background: #cfd2ea;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .filter-option.checked .switch::after { transform: translateX(13px); background: #ffffff; }
+  .filter-option input[type="checkbox"] { display: none; }
+  .filter-option .label-text { flex: 1; }
+  .filter-option.checked { color: #ffffff; font-weight: 600; }
   .filter-option .count {
-    color: var(--text-faint);
-    font-weight: 400;
-    font-size: 12px;
-    margin-left: auto;
-    padding-left: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--console-text-faint);
+    font-weight: 500;
+    font-size: 11px;
   }
-  .filter-option.zero-count { opacity: 0.4; }
+  .filter-option.zero-count { opacity: 0.35; }
 
-  /* ---------- Main content ---------- */
+  /* ---------- Main / paper area ---------- */
   main {
     flex: 1;
     min-width: 0;
-    padding: 28px 24px 60px 16px;
-    border-left: 1px solid var(--border);
+    padding: 34px 30px 60px 26px;
   }
   .active-filters {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 14px;
+    gap: 7px;
+    margin-bottom: 18px;
   }
   .active-filter-chip {
     display: flex;
     align-items: center;
-    gap: 6px;
-    background: var(--accent-bg);
-    color: var(--accent);
-    border: 1px solid var(--accent);
+    gap: 7px;
     border-radius: 999px;
-    padding: 4px 10px;
+    padding: 5px 13px;
     font-size: 12px;
+    font-weight: 700;
     cursor: pointer;
+    color: #fff;
   }
-  .active-filter-chip .x { font-weight: 700; }
+  .active-filter-chip .x { font-weight: 700; opacity: 0.85; }
   .toolbar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    color: var(--text-dim);
-    font-size: 13px;
-    margin-bottom: 14px;
+    align-items: baseline;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  #resultCount {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--ink);
+  }
+  #resultCount .unit {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-left: 8px;
   }
   .clear-btn {
     background: none;
-    border: 1px solid var(--border);
-    color: var(--text-dim);
-    padding: 5px 12px;
-    border-radius: 6px;
+    border: 1px solid var(--card-border);
+    color: var(--ink-dim);
+    padding: 6px 14px;
+    border-radius: 999px;
     cursor: pointer;
     font-size: 12.5px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.12s ease;
   }
-  .clear-btn:hover { color: var(--text); border-color: var(--text-dim); }
-  .episode-list { display: flex; flex-direction: column; gap: 10px; }
+  .clear-btn:hover { color: var(--ink); border-color: var(--ink); }
+
+  .episode-list { display: flex; flex-direction: column; gap: 11px; }
   .episode-card {
-    background: var(--panel);
-    border: 1px solid var(--border);
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-left: 5px solid var(--default);
     border-radius: 10px;
-    padding: 14px 16px;
+    padding: 16px 18px 16px 16px;
+    box-shadow: 0 1px 2px rgba(32,28,20,0.04);
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
   }
-  .episode-title { font-size: 15px; font-weight: 600; margin: 0 0 4px; }
-  .episode-title a { color: var(--text); text-decoration: none; }
-  .episode-title a:hover { color: var(--accent); }
-  .episode-meta { color: var(--text-dim); font-size: 12px; margin-bottom: 8px; }
-  .episode-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .episode-card:hover { box-shadow: 0 4px 14px rgba(32,28,20,0.08); }
+  .episode-top-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+  }
+  .episode-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15.5px;
+    font-weight: 700;
+    margin: 0 0 5px;
+    color: var(--ink);
+  }
+  .copy-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--ink);
+    border: 1px solid var(--ink);
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: all 0.15s ease;
+  }
+  .copy-btn:hover { background: #3a3427; }
+  .copy-btn.copied { background: var(--function); border-color: var(--function); }
+  .episode-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--ink-dim);
+    font-size: 11.5px;
+    margin-bottom: 11px;
+  }
+  .episode-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .episode-tag {
     font-size: 11px;
-    padding: 2px 8px;
+    padding: 4px 11px;
     border-radius: 999px;
-    background: #1f232c;
-    color: var(--text-dim);
+    font-weight: 700;
+    color: #ffffff;
   }
-  .episode-tag.matched { background: var(--accent-bg); color: var(--accent); }
-  .empty-state, .loading { text-align: center; color: var(--text-dim); padding: 60px 20px; }
+  .episode-tag.dim { opacity: 0.55; }
+  .empty-state, .loading {
+    text-align: center;
+    color: var(--ink-dim);
+    padding: 80px 20px;
+    font-size: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
 
   @media (max-width: 800px) {
     .layout { flex-direction: column; }
@@ -180,9 +330,18 @@
       width: 100%;
       position: static;
       max-height: none;
-      padding: 20px 20px 0;
+      min-height: 0;
+      padding: 22px 20px;
     }
-    main { border-left: none; padding: 20px; }
+    main { padding: 22px 18px; }
+  }
+
+  /* keyboard focus visibility */
+  .filter-option:focus-within .switch,
+  .copy-btn:focus-visible,
+  .clear-btn:focus-visible {
+    outline: 2px solid var(--stage);
+    outline-offset: 2px;
   }
 </style>
 </head>
@@ -190,8 +349,15 @@
 
 <div class="layout">
   <aside class="sidebar">
-    <h1>My First Million Episode Finder: What is your need of the day?</h1>
-    <p class="subtitle">Created by Anushka Bhide, avid and moody listener who will no doubt use this when wanting information vs inspiration vs just good ol' company.</p>
+    <div class="brand-row">
+      <div class="eq-bars"><span></span><span></span><span></span><span></span></div>
+    </div>
+    <p class="eyebrow">Tuning Deck</p>
+    <h1>My First Million Episode Finder</h1>
+    <p class="subtitle">What is your need of the day? Created by Anushka Bhide, avid and moody listener who will no doubt use this when wanting information vs inspiration vs just good ol' company.</p>
+    <div class="instruction-box">
+      <b>How this works:</b> flip switches to tune in. Hit <b>Copy title</b> on any episode, then paste it into wherever you get your podcasts to pull it right up.
+    </div>
     <div id="filterGroups"></div>
   </aside>
 
@@ -202,12 +368,20 @@
       <button class="clear-btn" id="clearBtn">Clear all filters</button>
     </div>
     <div class="episode-list" id="episodeList">
-      <div class="loading">Loading episodes...</div>
+      <div class="loading">Tuning in...</div>
     </div>
   </main>
 </div>
 
 <script>
+const GROUP_COLORS = {
+  "Stage": "var(--stage)",
+  "Function": "var(--function)",
+  "Business Model": "var(--bizmodel)",
+  "Career / Personal": "var(--personal)",
+  "Format": "var(--format)",
+};
+
 const TAXONOMY = {
   "Stage": ["idea-validation","side-hustle-part-time","0-to-1-launch","scaling-ops","fundraising","exit-or-acquisition"],
   "Function": ["sales-and-closing","marketing-and-growth","hiring-and-team","finance-and-unit-economics","product-and-positioning","operations"],
@@ -216,11 +390,10 @@ const TAXONOMY = {
   "Format": ["guest-interview","idea-brainstorm","news-reaction","deep-dive-single-topic","historical-biography-deep-dive","greatest-hits-replay"]
 };
 
-// selections[group] = Set of checked tags within that group
 let selections = {};
 Object.keys(TAXONOMY).forEach(g => selections[g] = new Set());
 
-let collapsedGroups = new Set(); // group labels currently collapsed
+let collapsedGroups = new Set();
 let episodes = [];
 
 function tagGroup(tag) {
@@ -237,15 +410,13 @@ async function loadEpisodes() {
     episodes = await res.json();
   } catch (e) {
     document.getElementById("episodeList").innerHTML =
-      '<div class="empty-state">Could not load episodes.json. Make sure it\'s in the same folder as this file.</div>';
+      '<div class="empty-state">Static on the line — could not load episodes.json.<br>Make sure it\'s in the same folder as this file.</div>';
     return;
   }
   renderSidebar();
   render();
 }
 
-// Does an episode pass the current filters, optionally ignoring one group
-// (used to compute "if I also checked this" counts)
 function episodeMatches(ep, ignoreGroup) {
   const tags = ep.tags || [];
   for (const [group, selectedSet] of Object.entries(selections)) {
@@ -262,12 +433,13 @@ function renderSidebar() {
   container.innerHTML = "";
 
   for (const [groupLabel, tags] of Object.entries(TAXONOMY)) {
+    const color = GROUP_COLORS[groupLabel];
     const groupDiv = document.createElement("div");
     groupDiv.className = "filter-group" + (collapsedGroups.has(groupLabel) ? " collapsed" : "");
 
     const header = document.createElement("div");
     header.className = "filter-group-header";
-    header.innerHTML = `<span class="filter-group-title">${groupLabel}</span><span class="filter-group-toggle">▾</span>`;
+    header.innerHTML = `<span class="filter-group-title" style="color:${color}">${groupLabel}</span><span class="filter-group-toggle">▾</span>`;
     header.onclick = () => {
       if (collapsedGroups.has(groupLabel)) collapsedGroups.delete(groupLabel);
       else collapsedGroups.add(groupLabel);
@@ -278,7 +450,6 @@ function renderSidebar() {
     const optionsDiv = document.createElement("div");
     optionsDiv.className = "filter-options";
 
-    // count episodes matching current filters (excluding this group) per tag
     const counts = {};
     tags.forEach(t => {
       counts[t] = episodes.filter(ep => episodeMatches(ep, groupLabel) && (ep.tags || []).includes(t)).length;
@@ -290,13 +461,12 @@ function renderSidebar() {
       const optDiv = document.createElement("label");
       optDiv.className = "filter-option" + (isChecked ? " checked" : "") + (count === 0 && !isChecked ? " zero-count" : "");
       optDiv.innerHTML = `
-        <input type="checkbox" ${isChecked ? "checked" : ""} data-group="${groupLabel}" data-tag="${tag}">
-        <span>${tag.replace(/-/g, " ")}</span>
+        <input type="checkbox" ${isChecked ? "checked" : ""}>
+        <span class="switch" style="${isChecked ? `background:${color}` : ""}"></span>
+        <span class="label-text">${tag.replace(/-/g, " ")}</span>
         <span class="count">${count}</span>
       `;
-      optDiv.querySelector("input").addEventListener("change", (e) => {
-        toggleTag(groupLabel, tag);
-      });
+      optDiv.addEventListener("click", (e) => { e.preventDefault(); toggleTag(groupLabel, tag); });
       optionsDiv.appendChild(optDiv);
     });
 
@@ -317,10 +487,12 @@ function renderActiveFilters() {
   container.innerHTML = "";
   let any = false;
   for (const [group, set] of Object.entries(selections)) {
+    const color = GROUP_COLORS[group];
     set.forEach(tag => {
       any = true;
       const chip = document.createElement("div");
       chip.className = "active-filter-chip";
+      chip.style.background = color;
       chip.innerHTML = `<span>${tag.replace(/-/g, " ")}</span><span class="x">×</span>`;
       chip.onclick = () => toggleTag(group, tag);
       container.appendChild(chip);
@@ -329,36 +501,87 @@ function renderActiveFilters() {
   container.style.display = any ? "flex" : "none";
 }
 
+function copyToClipboard(text, btnEl) {
+  const doCopiedState = () => {
+    const original = btnEl.innerHTML;
+    btnEl.textContent = "✓ Copied";
+    btnEl.classList.add("copied");
+    setTimeout(() => {
+      btnEl.innerHTML = original;
+      btnEl.classList.remove("copied");
+    }, 1500);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(doCopiedState).catch(() => fallbackCopy(text, doCopiedState));
+  } else {
+    fallbackCopy(text, doCopiedState);
+  }
+}
+
+function fallbackCopy(text, cb) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); } catch (e) {}
+  document.body.removeChild(ta);
+  cb();
+}
+
 function render() {
   renderActiveFilters();
   const filtered = episodes.filter(ep => episodeMatches(ep, null));
 
-  document.getElementById("resultCount").textContent =
-    `${filtered.length} episode${filtered.length !== 1 ? "s" : ""}`;
+  document.getElementById("resultCount").innerHTML =
+    `${filtered.length} <span class="unit">episode${filtered.length !== 1 ? "s" : ""} queued</span>`;
 
   const listEl = document.getElementById("episodeList");
   if (filtered.length === 0) {
-    listEl.innerHTML = '<div class="empty-state">No episodes match these filters. Try removing one.</div>';
+    listEl.innerHTML = '<div class="empty-state">Static on the line.<br>Try flipping one fewer switch.</div>';
     return;
   }
 
   const allSelectedTags = new Set();
   Object.values(selections).forEach(set => set.forEach(t => allSelectedTags.add(t)));
 
-  listEl.innerHTML = filtered.slice(0, 200).map(ep => {
-    const tagsHtml = (ep.tags || []).map(t =>
-      `<span class="episode-tag ${allSelectedTags.has(t) ? "matched" : ""}">${t.replace(/-/g, " ")}</span>`
-    ).join("");
-    const epNum = ep.episode_number ? `#${ep.episode_number}` : "Special";
+  listEl.innerHTML = filtered.slice(0, 200).map((ep, idx) => {
+    const tags = ep.tags || [];
+    const primaryGroup = tags.length ? tagGroup(tags[0]) : null;
+    const spineColor = primaryGroup ? GROUP_COLORS[primaryGroup] : "var(--default)";
+
+    const tagsHtml = tags.map(t => {
+      const g = tagGroup(t);
+      const color = g ? GROUP_COLORS[g] : "var(--default)";
+      const isMatched = allSelectedTags.size === 0 || allSelectedTags.has(t);
+      return `<span class="episode-tag ${isMatched ? "" : "dim"}" style="background:${color}">${t.replace(/-/g, " ")}</span>`;
+    }).join("");
+
+    const epNum = ep.episode_number ? `EP ${ep.episode_number}` : "SPECIAL";
     const dateStr = ep.date ? new Date(ep.date).toLocaleDateString(undefined, {year:"numeric", month:"short", day:"numeric"}) : "";
+
     return `
-      <div class="episode-card">
-        <div class="episode-title"><a href="${ep.url}" target="_blank" rel="noopener">${ep.title}</a></div>
-        <div class="episode-meta">${epNum}${dateStr ? " · " + dateStr : ""}</div>
+      <div class="episode-card" style="border-left-color:${spineColor}">
+        <div class="episode-top-row">
+          <div>
+            <div class="episode-title">${ep.title}</div>
+            <div class="episode-meta">${epNum}${dateStr ? " — " + dateStr : ""}</div>
+          </div>
+          <button class="copy-btn" data-idx="${idx}">Copy title</button>
+        </div>
         <div class="episode-tags">${tagsHtml}</div>
       </div>
     `;
   }).join("");
+
+  listEl.querySelectorAll(".copy-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const idx = parseInt(btn.dataset.idx, 10);
+      const ep = filtered[idx];
+      copyToClipboard(ep.title, btn);
+    });
+  });
 }
 
 document.getElementById("clearBtn").addEventListener("click", () => {
@@ -372,3 +595,4 @@ loadEpisodes();
 
 </body>
 </html>
+
