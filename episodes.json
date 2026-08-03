@@ -14932,5 +14932,27 @@
     "fallback_description": null,
     "is_special": false,
     "tags": []
+  },
+  {
+    "id": "c6b5395fd163",
+    "episode_number": 846,
+    "title": "This guy made $80M in profit. Here's his next 3 stock picks",
+    "date": "Wed, 29 Jul 2026 09:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Social Arbitrage\n(6:29) Needohs\n(20:16) Nerd culture\n(27:06) Information asymmetry\n(46:30) Amazon\n(1:02:21) Podcasting",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "fe5186424627",
+    "episode_number": 847,
+    "title": "The surprising product that built Italy's richest family",
+    "date": "Fri, 31 Jul 2026 10:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Shaan gets invited to graduation\n(2:19) The richest man in Italy\n(16:09) The golden window\n(26:51) meeting an xtreme multi-billionaire\n(36:04) An update about Ben WIlson\n(42:52) achieving greatness vs being great",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
   }
 ]
