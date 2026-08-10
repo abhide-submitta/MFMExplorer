@@ -14954,5 +14954,27 @@
     "fallback_description": null,
     "is_special": false,
     "tags": []
+  },
+  {
+    "id": "957ab0ab5e4a",
+    "episode_number": 848,
+    "title": "We found the internet's best sales advice",
+    "date": "Tue, 04 Aug 2026 10:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) highest value comment from HackerNews\n(2:50) always bring 2 diet cokes to a negotiation\n(7:36) Saving lives as a service\n(17:24) Bernard Arnaults revenge letter\n(25:29) The business of Magic: The Gathering\n(41:58) Bryan Johnson, The Dana White of Longevity",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "33d809dc6b09",
+    "episode_number": 849,
+    "title": "9 drunk ideas that sound stupid (but are secretly genius)",
+    "date": "Thu, 06 Aug 2026 10:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Intro\n(2:07) IDEA 1: Reverse vacations\n(6:03) IDEA 2: Rap battle + UFC fight\n(13:18) IDEA 3: Giant claw machine\n(20:39) IDEA 4: Butter dispenser\n(27:32) IDEA 5: beepers for kids\n(35:35) IDEA 6: Mexican Benihana\n(40:01) IDEA 7: bulk custom gifts\n(44:10) IDEA 8: Slop Stop\n(49:06) IDEA 9: Take your roommate to work day",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
   }
 ]
