@@ -14976,5 +14976,38 @@
     "fallback_description": null,
     "is_special": false,
     "tags": []
+  },
+  {
+    "id": "e70677327a60",
+    "episode_number": 850,
+    "title": "3 killer businesses hiding in plain sight",
+    "date": "Wed, 12 Aug 2026 10:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) The wild economics of lab testing on monkeys\n(11:01) Salad oil crisis\n(15:35) the art of noticing&nbsp;\n(24:38) enthusiasm\n(27:39) know thy 8-year old self\n(32:32) be shameless\n(37:08) Sam goes to SF for 7 days",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "349e95ae7812",
+    "episode_number": 851,
+    "title": "$39B founder says his company could 100x in 5 years",
+    "date": "Fri, 14 Aug 2026 11:11:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Intro\n(3:29) Hark, a human in a box\n(8:00) zero constraints\n(17:32) rapid prototyping\n(21:38) What are the robots doing?\n(23:45) what about the hype is real?\n(27:54) finding the best people\n(30:14) $20M dollar salaries for engineers\n(32:03) How Zuck is buying his way into AI\n(35:44) Auditing Brett's 2026 predictions\n(42:33) reducing your buckets\n(44:00) show us your home screen\n(46:17) hitting rock bottom 3x\n(57:22) who inspires Brett",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "b11e4cf5aace",
+    "episode_number": 852,
+    "title": "3 strangers showed us how they made $8M, $10M, & $40M/year",
+    "date": "Mon, 17 Aug 2026 11:07:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Intro\n(1:31) Raav Gupta, Posha\n(20:03) Nick Saltarelli, Mid-Day Squares\n(39:48) Shreyas Parab, DayDream Dental",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
   }
 ]
