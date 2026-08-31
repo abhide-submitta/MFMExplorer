@@ -15009,5 +15009,49 @@
     "fallback_description": null,
     "is_special": false,
     "tags": []
+  },
+  {
+    "id": "44e9714c20b4",
+    "episode_number": 853,
+    "title": "Asking 3 young millionaires how they make $1.8M, $5M, & $12M/year",
+    "date": "Wed, 19 Aug 2026 10:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Nick Haschka, OnPoint Generators\n(17:39) Kevin Moyer, Smash My Trash\n(36:54) Noam Eisenberg, TMJaw",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "7cff3c8451d2",
+    "episode_number": 854,
+    "title": "3 millionaires reveal their super niche businesses",
+    "date": "Fri, 21 Aug 2026 11:01:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Rishi Talati, Hot Plate\n(20:10) Ajay Mehta, Tolan\n(39:53) Jonathan Baer, Overlap",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "f0a0b79eb0a4",
+    "episode_number": 855,
+    "title": "I built a $2,000,000,000 business on vibes",
+    "date": "Mon, 24 Aug 2026 11:11:00 -0000",
+    "url": "",
+    "show_notes": null,
+    "fallback_description": "Sam's database on how long it takes to become a millionaire: https://clickhubspot.com/elkv\n\nEpisode 855: Sam Parr ( https://x.com/theSamParr ) and Shaan Puri ( https://x.com/ShaanVP ) talk to Allison Ellsworth, the founder of Poppi.&nbsp;&nbsp;\n\n—",
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "ed0d06e88172",
+    "episode_number": 856,
+    "title": "How a $5B founder is using AI (3 tutorials)",
+    "date": "Wed, 26 Aug 2026 11:16:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) intro\n(2:27) The sales pitch&nbsp;\n(7:04) My Robot Executive Staff, Waking Up Like The President\n(14:13) Evening brief\n(17:39) AI that argues with you\n(19:32) War Council skill\n(31:53) How to use AI to hire better\n(48:15) being a billionaire before 40\n(51:17) a case for not having a chip on your shoulder\n(54:36) 1-dimensional winners\n(1:00:55) recommended reading",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
   }
 ]
