@@ -15141,5 +15141,27 @@
     "fallback_description": null,
     "is_special": false,
     "tags": []
+  },
+  {
+    "id": "0c183acd8a62",
+    "episode_number": 865,
+    "title": "There’s 98 days until 2027...Do this and you’ll thank yourself on Jan 1st",
+    "date": "Fri, 25 Sep 2026 10:43:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) There are 99 days left in the year\n(1:40) Parkinson’s Law\n(3:35) The toxic love of events\n(9:25) Joel Greenblatt’s Jelly Bean experiment\n(12:25) The aftershocks of Joe Hudson\n(15:30) Shaan’s “5 voices in the head” theory\n(18:05) Six Thinking Hats\n(20:00) The two minds of a creator\n(22:45) Blue notebook vs. red notebook\n(23:50) Sam’s three notebooks\n(27:00) “Your brain is an old mansion”\n(30:00) Obscure billionaire, family dynasty\n(41:40) Nike stock falls 80%\n(44:00) I created a monster / turn shit into gold\n(48:35) Tales from the house",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "23dda9923e87",
+    "episode_number": 866,
+    "title": "MIT scientist: Elon Musk was right, we are almost certainly in a simulation",
+    "date": "Mon, 28 Sep 2026 10:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Are We Living in a Simulation?\n(8:30) Ancient Religions Already Believed This\n(14:40) AI Agents Are Getting Weird\n(28:40) Quantum Physics & the Simulation Theory\n(40:50) Aliens, UFOs & Glitches in the Matrix\n(51:30) Dreams, Past Lives & DMT\n(55:00) How Simulation Theory Changes How You Live",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
   }
 ]
