@@ -15284,5 +15284,27 @@
     "fallback_description": null,
     "is_special": false,
     "tags": []
+  },
+  {
+    "id": "9742f69e48e8",
+    "episode_number": 879,
+    "title": "The 2 businesses AI can never make obsolete",
+    "date": "Wed, 04 Nov 2026 12:19:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) NADA\n(3:59) White Coat Investor\n(5:03) BNI\n(8:35) MODA\n(11:12) Finding/Nurturing Whales\n(15:50) Triumph\n(21:43) Private Photo Vault",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
+  },
+  {
+    "id": "e98010d3f75c",
+    "episode_number": 880,
+    "title": "What I’d build if I wanted to get rich with AI",
+    "date": "Mon, 09 Nov 2026 11:00:00 -0000",
+    "url": "",
+    "show_notes": "(0:00) Drugs and Miracles\n(7:05) Food Is Technology\n(8:45) Warfare\n(12:40) Building Homes With Robots\n(18:05) New Materials\n(18:20) Full Self-Driving Everything\n(19:10) Weather and Oceans\n(19:25) Human Body Hardware\n(25:30) Common Sense Politics\n(33:05) Think About Your Career Like an Investor",
+    "fallback_description": null,
+    "is_special": false,
+    "tags": []
   }
 ]
